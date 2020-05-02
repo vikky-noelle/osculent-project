@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
+import { bake_cookie } from "sfcookies";
 
 class signIn extends Component {
 	// state = {
@@ -66,6 +67,8 @@ class signIn extends Component {
 					console.log(res);
 					if (res.status) {
 						alert("Logged In, redirecting to home.");
+						bake_cookie("username", this.state.username);
+						bake_cookie("loggedIn", true);
 						this.props.history.push("/");
 					} else alert(`Error in logging in, error: ${res.message}`);
 				});
