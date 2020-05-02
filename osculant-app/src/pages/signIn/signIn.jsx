@@ -50,7 +50,11 @@ class signIn extends Component {
 			alert("username or password can't be an empty field");
 		else {
 			console.log("calling api");
-			fetch("http://localhost:5000/getDetails").then((res) => console.log(res));
+			fetch("http://localhost:4000/verifyUser")
+				.then((res) => res.json())
+				.then((res) => {
+					console.log(res);
+				});
 		}
 		event.preventDefault();
 	}
