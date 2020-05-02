@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class Counter extends Component {
+class Counters extends Component {
 	state = {
 		data: "Hello World!",
 		count: 0,
@@ -31,6 +31,7 @@ class Counter extends Component {
 			// </React.Fragment>
 			<div className="container">
 				<h1>
+					lalalala
 					{this.justFunction()}
 					{this.state.count}
 				</h1>
@@ -49,4 +50,4 @@ class Counter extends Component {
 	}
 }
 
-export default Counter;
+export default Counters;
