@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 
 class signIn extends Component {
 	// state = {
@@ -50,10 +51,23 @@ class signIn extends Component {
 			alert("username or password can't be an empty field");
 		else {
 			console.log("calling api");
-			fetch("http://localhost:4000/verifyUser")
+			fetch("http://localhost:4000/verifyUser", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					username: this.state.username,
+					password: this.state.password,
+				}),
+			})
 				.then((res) => res.json())
 				.then((res) => {
 					console.log(res);
+					if (res.status) {
+						alert("Logged In, redirecting to home.");
+						this.props.history.push("/");
+					} else alert(`Error in logging in, error: ${res.message}`);
 				});
 		}
 		event.preventDefault();
@@ -67,4 +81,4 @@ class signIn extends Component {
 	}
 }
 
-export default signIn;
+export default withRouter(signIn);

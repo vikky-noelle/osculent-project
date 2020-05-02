@@ -3,7 +3,7 @@ var router = express.Router();
 var cors = require("cors");
 var db = require("../database/dbhandler");
 
-/* GET home page. */
+/* GET testing response. */
 router.get("/", cors(), function (req, res) {
 	console.log("working");
 	db.checkConnection(function (err, response) {
@@ -23,6 +23,33 @@ router.get("/", cors(), function (req, res) {
 			} else
 				res.send({
 					status: "no data",
+				});
+		}
+	});
+});
+
+// verify username and password
+router.post("/verifyUser", cors(), (req, res) => {
+	console.log("working");
+	const username = req.body.username;
+	const password = req.body.password;
+	db.verifyUser(username, password, function (err, response) {
+		if (err) {
+			console.log(err);
+			res.send({
+				status: false,
+				message: "Failed to verify.",
+			});
+		} else {
+			if (response)
+				res.send({
+					status: response,
+					message: "user found!",
+				});
+			else
+				res.send({
+					status: false,
+					message: "user does not exist.",
 				});
 		}
 	});

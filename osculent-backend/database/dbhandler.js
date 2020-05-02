@@ -21,4 +21,20 @@ exports.checkConnection = function (callback) {
 	});
 };
 
+// verify user
+exports.verifyUser = function (username, password, callback) {
+	let status = true;
+	db.all("SELECT * FROM users", function (err, rows) {
+		if (err) return callback(err);
+		rows.forEach(function (row) {
+			if (username === row.username && password === row.password) {
+				status = false;
+				return callback(null, true);
+			}
+		});
+		// callback throws 2 responses one after another
+		if (status) return callback(null, false);
+	});
+};
+
 // db.close causes issues hence db is supposed to be opened again and again
