@@ -3,6 +3,7 @@ var router = express.Router();
 var cors = require("cors");
 var db = require("../database/dbhandler");
 
+// GET REQUESTS
 /* GET testing response. */
 router.get("/", cors(), function (req, res) {
 	console.log("working");
@@ -28,6 +29,32 @@ router.get("/", cors(), function (req, res) {
 	});
 });
 
+// get all blogs
+router.get("/getBlogs", cors(), function (req, res) {
+	const username = req.query.username;
+	db.getBlogs(username, function (err, response) {
+		if (err) {
+			console.log(err);
+			res.send({
+				status: false,
+				message: "Failed to fetch blogs.",
+			});
+		} else {
+			if (response)
+				res.send({
+					status: true,
+					data: response,
+				});
+			else
+				res.send({
+					status: false,
+					message: "No data.",
+				});
+		}
+	});
+});
+
+// POST REQUESTS
 // verify username and password
 router.post("/verifyUser", cors(), (req, res) => {
 	console.log("working");
