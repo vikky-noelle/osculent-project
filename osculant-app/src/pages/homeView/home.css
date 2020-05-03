@@ -6,3 +6,22 @@
 	padding: 10px;
 	margin-bottom: 50px;
 }
+.tiles {
+	height: 180px;
+	border-bottom: 1px solid silver;
+}
+.tiles > h1 {
+	font-size: 1.9em;
+}
+.tiles > h2 {
+	font-size: 1.5em;
+}
+.tiles > h3 {
+	float: right;
+	font-size: 1.3em;
+}
+.tiles > h4 {
+	padding: 10px;
+	font-size: 1.4em;
+	color: #444444;
+}

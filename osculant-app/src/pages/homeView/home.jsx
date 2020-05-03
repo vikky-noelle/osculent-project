@@ -9,11 +9,16 @@ class Home extends Component {
 		this.state = {
 			blogs: [],
 		};
-		this.getBlogs = this.getBlogs.bind(this);
 	}
+
+	// calling apis on load
+	componentDidMount() {
+		this.getBlogs();
+	}
+
 	render() {
 		if (read_cookie("loggedIn")) {
-			this.getBlogs();
+			// this.getBlogs();
 			const { blogs } = this.state;
 			return (
 				<div>
@@ -27,13 +32,19 @@ class Home extends Component {
 						style={{
 							width: "70%",
 							marginLeft: "15%",
-							border: "1px solid black",
 							height: "300px",
 						}}
 					>
-						yo
 						{blogs.map((blog) => (
-							<li key={blog.ID}>{blog.username}</li>
+							<div key={blog.ID} className="tiles">
+								<h3>on {blog.date}</h3>
+								<h1>{blog.title}</h1>
+								<h2>By {blog.username}</h2>
+								<h4>{blog.content}</h4>
+								<button onClick={() => this.handleDelete(blog.ID)}>
+									Delete blog
+								</button>
+							</div>
 						))}
 					</div>
 				</div>
@@ -45,6 +56,30 @@ class Home extends Component {
 						You are not logged In, log in to access the services.
 					</h1>
 				</div>
+			);
+	}
+
+	handleDelete(id) {
+		console.log(id);
+		fetch("http://localhost:4000/deleteBlog", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				id: id,
+			}),
+		})
+			.then((res) => res.json())
+			.then(
+				(result) => {
+					console.log(result);
+				},
+				(error) => {
+					this.setState({
+						error,
+					});
+				}
 			);
 	}
 

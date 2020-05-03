@@ -140,4 +140,32 @@ router.post("/addBlog", cors(), (req, res) => {
 		}
 	});
 });
+
+// deleting blog
+router.post("/deleteBlog", cors(), (req, res) => {
+	console.log("working");
+	const username = req.body.id;
+	console.log(`id :${id}`);
+	db.deleteBlog(id, function (err, response) {
+		if (err) {
+			console.log(err);
+			res.send({
+				status: false,
+				message: "Failed to delete.",
+			});
+		} else {
+			if (response)
+				res.send({
+					status: true,
+					message: "blog deleted!",
+				});
+			else
+				res.send({
+					status: false,
+					message: "Failed to delete.",
+				});
+		}
+	});
+});
+
 module.exports = router;
