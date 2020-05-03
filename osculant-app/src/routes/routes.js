@@ -13,7 +13,7 @@ export default function Routes() {
 			<Route path="/" exact component={Home} />
 			<Route path="/signIn" exact component={signIn} />
 			<Route path="/register" exact component={Register} />
-			<Route path="/view" component={blogView} />
+			<Route path="/view/:id" component={blogView} />
 			<Route path="/addBlog" component={addBlog} />
 
 			{/* default route when random url is accessed */}

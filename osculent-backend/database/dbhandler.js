@@ -96,4 +96,17 @@ exports.deleteBlog = function (id, callback) {
 		return callback(null, true);
 	});
 };
+
+// getting a single blog
+exports.getBlog = function (id, callback) {
+	list = [];
+	db.all("SELECT * FROM blogs", function (err, rows) {
+		if (err) return callback(err);
+		rows.forEach(function (row) {
+			console.log(row);
+			if (+id === row.ID) list.push(row);
+		});
+		return callback(null, list);
+	});
+};
 // db.close causes issues hence db is supposed to be opened again and again

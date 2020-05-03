@@ -1,0 +1,18 @@
+.blog-view {
+	margin-top: 30px;
+	width: 80%;
+	height: auto;
+	/* border: 1px solid black; */
+	margin-left: 10%;
+}
+.blog-view > h1 {
+	/* width: 100%; */
+	text-align: center;
+}
+.blog-view > h2 {
+	font-size: 1.3em;
+}
+.blog-view > p {
+	text-align: center;
+	font-size: 1.5em;
+}

@@ -54,6 +54,32 @@ router.get("/getBlogs", cors(), function (req, res) {
 	});
 });
 
+// get individual blog
+router.get("/getBlog", cors(), function (req, res) {
+	const id = req.query.id;
+	console.log(id);
+	db.getBlog(id, function (err, response) {
+		if (err) {
+			console.log(err);
+			res.send({
+				status: false,
+				message: "Failed to fetch blogs.",
+			});
+		} else {
+			if (response)
+				res.send({
+					status: true,
+					data: response,
+				});
+			else
+				res.send({
+					status: false,
+					message: "No data.",
+				});
+		}
+	});
+});
+
 // POST REQUESTS
 // verify username and password
 router.post("/verifyUser", cors(), (req, res) => {

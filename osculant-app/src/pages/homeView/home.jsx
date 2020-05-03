@@ -44,7 +44,7 @@ class Home extends Component {
 								<h2>By {blog.username}</h2>
 								<h4>{blog.content}</h4>
 								<button
-									onClick={() => this.props.history.push("/view?id=" + blog.ID)}
+									onClick={() => this.props.history.push("/view/" + blog.ID)}
 								>
 									View Blog
 								</button>
