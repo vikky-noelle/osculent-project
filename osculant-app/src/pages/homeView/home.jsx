@@ -74,6 +74,7 @@ class Home extends Component {
 			.then(
 				(result) => {
 					console.log(result);
+					if (result.status) this.getBlogs();
 				},
 				(error) => {
 					this.setState({

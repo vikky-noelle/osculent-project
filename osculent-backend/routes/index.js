@@ -144,7 +144,7 @@ router.post("/addBlog", cors(), (req, res) => {
 // deleting blog
 router.post("/deleteBlog", cors(), (req, res) => {
 	console.log("working");
-	const username = req.body.id;
+	const id = req.body.id;
 	console.log(`id :${id}`);
 	db.deleteBlog(id, function (err, response) {
 		if (err) {

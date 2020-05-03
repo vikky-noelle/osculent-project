@@ -85,27 +85,15 @@ exports.getBlogs = function (username, callback) {
 		});
 		return callback(null, list);
 	});
-
-	// experimental method for further use
-
-	// db.run(`SELECT FROM * "blogs" WHERE username = ${username}`, function (
-	// 	err,
-	// 	res
-	// ) {
-	// 	if (err) return callback(err);
-	// 	res.forEach(function (row) {
-	// 		list.push(row);
-	// 	});
-	// 	return callback(null, list);
-	// });
 };
+// delete blog
 exports.deleteBlog = function (id, callback) {
-	db.all("SELECT * FROM blogs", function (err, rows) {
+	id = {
+		$id: id,
+	};
+	db.run(`DELETE from blogs WHERE id = $id`, id, function (err) {
 		if (err) return callback(err);
-		rows.forEach(function (row) {
-			if (username === row.username) list.push(row);
-		});
-		return callback(null, list);
+		return callback(null, true);
 	});
 };
 // db.close causes issues hence db is supposed to be opened again and again
