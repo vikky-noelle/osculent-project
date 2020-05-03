@@ -21,7 +21,7 @@ class signIn extends Component {
 	}
 	render() {
 		return (
-			<div style={{ width: "60%", marginLeft: "20%", height: "auto" }}>
+			<div style={{ width: "40%", marginLeft: "20%", height: "auto" }}>
 				<h1 style={{ textAlign: "center", marginTop: "50px" }}>Sign In</h1>
 				<input
 					type="text"

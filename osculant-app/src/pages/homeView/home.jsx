@@ -35,12 +35,19 @@ class Home extends Component {
 							height: "300px",
 						}}
 					>
+						{this.state.blogs.length === 0 &&
+							"There are currently no Blogs attached to your account!"}
 						{blogs.map((blog) => (
 							<div key={blog.ID} className="tiles">
 								<h3>on {blog.date}</h3>
 								<h1>{blog.title}</h1>
 								<h2>By {blog.username}</h2>
 								<h4>{blog.content}</h4>
+								<button
+									onClick={() => this.props.history.push("/view?id=" + blog.ID)}
+								>
+									View Blog
+								</button>
 								<button onClick={() => this.handleDelete(blog.ID)}>
 									Delete blog
 								</button>
