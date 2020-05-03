@@ -1,0 +1,32 @@
+.blog-form {
+	margin-top: 30px;
+	width: 70%;
+	margin-left: 15%;
+	/* border: 1px solid black; */
+}
+.blog-form > h1 {
+	text-align: center;
+}
+.blog-form > label,
+input,
+textarea {
+	width: 80%;
+}
+.blog-form > label {
+	margin-top: 20px;
+	margin-left: 10%;
+}
+.blog-form > input {
+	padding: 5px;
+	margin-top: 20px;
+	margin-left: 10%;
+}
+.blog-form > textarea {
+	padding: 5px;
+	margin-top: 20px;
+	margin-left: 10%;
+}
+.blog-form > button {
+	width: 20%;
+	margin: 20px 40%;
+}

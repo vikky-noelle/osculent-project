@@ -5,6 +5,7 @@ import Home from "../pages/homeView/home";
 import blogView from "../pages/blogView/blogView";
 import signIn from "../pages/signIn/signIn";
 import Register from "../pages/register/register";
+import addBlog from "../pages/addBlog/addBlog";
 
 export default function Routes() {
 	return (
@@ -13,6 +14,7 @@ export default function Routes() {
 			<Route path="/signIn" exact component={signIn} />
 			<Route path="/register" exact component={Register} />
 			<Route path="/view" component={blogView} />
+			<Route path="/addBlog" component={addBlog} />
 
 			{/* default route when random url is accessed */}
 			<Route component={wrongRoute} />

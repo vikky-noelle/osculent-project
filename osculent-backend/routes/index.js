@@ -55,4 +55,62 @@ router.post("/verifyUser", cors(), (req, res) => {
 	});
 });
 
+// registering
+router.post("/registerUser", cors(), (req, res) => {
+	console.log("working");
+	const username = req.body.username;
+	const password = req.body.password;
+	const email = req.body.email;
+	console.log(`username :${username} password: ${password} email: ${email}`);
+	db.registerUser(username, email, password, function (err, response) {
+		if (err) {
+			console.log(err);
+			res.send({
+				status: false,
+				message: "Failed to register.",
+			});
+		} else {
+			if (response)
+				res.send({
+					status: response,
+					message: "user registered!",
+				});
+			else
+				res.send({
+					status: false,
+					message: "Failed to register.",
+				});
+		}
+	});
+});
+
+//adding blog
+router.post("/addBlog", cors(), (req, res) => {
+	console.log("working");
+	const username = req.body.username;
+	const date = req.body.date;
+	const title = req.body.title;
+	const content = req.body.content;
+	console.log(`username :${username} title: ${title}`);
+	db.addBlog(username, date, title, content, function (err, response) {
+		if (err) {
+			console.log(err);
+			res.send({
+				status: false,
+				message: "Failed to add.",
+			});
+		} else {
+			if (response)
+				res.send({
+					status: response,
+					message: "blog added!",
+				});
+			else
+				res.send({
+					status: false,
+					message: "Failed to add.",
+				});
+		}
+	});
+});
 module.exports = router;

@@ -58,6 +58,25 @@ class Register extends Component {
 			alert("username or password or email can't be an empty field");
 		else {
 			console.log("calling api");
+			fetch("http://localhost:4000/registerUser", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					username: this.state.username,
+					email: this.state.email,
+					password: this.state.password,
+				}),
+			})
+				.then((res) => res.json())
+				.then((res) => {
+					console.log(res);
+					if (res.status) {
+						alert("Registered!, redirecting to log in page and log in again.");
+						this.props.history.push("/signIn");
+					} else alert(`Error in registering, error: ${res.message}`);
+				});
 		}
 		event.preventDefault();
 	}

@@ -37,4 +37,42 @@ exports.verifyUser = function (username, password, callback) {
 	});
 };
 
+// registering user
+exports.registerUser = function (username, email, password, callback) {
+	user = {
+		$username: username,
+		$email: email,
+		$password: password,
+	};
+	db.run(
+		`INSERT INTO "users" (username,email,password) VALUES($username, $email, $password)`,
+		user,
+		function (err) {
+			if (err) {
+				return callback(err, false);
+			}
+			return callback(null, true);
+		}
+	);
+};
+
+// adding Blog
+exports.addBlog = function (username, date, title, content, callback) {
+	user = {
+		$username: username,
+		$date: date,
+		$title: title,
+		$content: content,
+	};
+	db.run(
+		`INSERT INTO "blogs" (username,title,date,content) VALUES($username, $title, $date, $content)`,
+		user,
+		function (err) {
+			if (err) {
+				return callback(err, false);
+			}
+			return callback(null, true);
+		}
+	);
+};
 // db.close causes issues hence db is supposed to be opened again and again
