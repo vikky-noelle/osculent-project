@@ -79,19 +79,19 @@ class addBlog extends Component {
 		if (this.state.title.length === 0 || this.state.content.length === 0)
 			alert("title or content can't be an empty field");
 		else {
+			const formdata = new FormData();
+			formdata.append("username", this.state.username);
+			formdata.append("title", this.state.title);
+			formdata.append("date", this.state.date);
+			formdata.append("content", this.state.content);
+			formdata.append("image", this.state.selectedFile);
 			console.log(this.state.selectedFile);
 			fetch("http://localhost:4000/addBlog", {
 				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({
-					username: this.state.username,
-					title: this.state.title,
-					date: this.state.date,
-					content: this.state.content,
-					image: this.state.selectedFile,
-				}),
+				// headers: {
+				// 	"Content-Type": "application/json",
+				// },
+				body: formdata,
 			})
 				.then((res) => res.json())
 				.then((res) => {

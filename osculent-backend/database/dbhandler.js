@@ -57,16 +57,16 @@ exports.registerUser = function (username, email, password, callback) {
 };
 
 // adding Blog
-exports.addBlog = function (username, date, title, content, image, callback) {
+exports.addBlog = function (username, date, title, content, path, callback) {
 	user = {
 		$username: username,
 		$date: date,
 		$title: title,
 		$content: content,
-		$image: image,
+		$imageurl: path,
 	};
 	db.run(
-		`INSERT INTO "blogs" (username,title,date,content) VALUES($username, $title, $date, $content)`,
+		`INSERT INTO "blogs" (username,title,date,content,imageurl) VALUES($username, $title, $date, $content, $imageurl)`,
 		user,
 		function (err) {
 			if (err) {
@@ -77,6 +77,7 @@ exports.addBlog = function (username, date, title, content, image, callback) {
 	);
 };
 
+// getting all blogs
 exports.getBlogs = function (username, callback) {
 	list = [];
 	db.all("SELECT * FROM blogs", function (err, rows) {

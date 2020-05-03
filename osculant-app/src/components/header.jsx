@@ -5,7 +5,7 @@ import "./header.css";
 
 class Header extends Component {
 	componentDidMount() {
-		bake_cookie("loggedIn", false);
+		if (read_cookie("loggedIn") !== undefined) bake_cookie("loggedIn", false);
 	}
 
 	render() {

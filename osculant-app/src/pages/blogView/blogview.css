@@ -4,15 +4,25 @@
 	height: auto;
 	/* border: 1px solid black; */
 	margin-left: 10%;
+	text-align: center;
 }
 .blog-view > h1 {
 	/* width: 100%; */
 	text-align: center;
 }
 .blog-view > h2 {
+	text-align: left;
 	font-size: 1.3em;
 }
 .blog-view > p {
 	text-align: center;
 	font-size: 1.5em;
+}
+.blog-view > img {
+	max-width: 400px;
+	max-height: 600px;
+}
+.blog-view > button {
+	position: absolute;
+	left: 10%;
 }

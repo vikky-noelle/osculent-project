@@ -3,6 +3,30 @@ var router = express.Router();
 var cors = require("cors");
 var db = require("../database/dbhandler");
 
+var multer = require("multer");
+// file storage
+const storage = multer.diskStorage({
+	destination: function (req, file, callback) {
+		callback(null, "uploads/");
+	},
+	filename: function (req, file, callback) {
+		callback(null, new Date().toISOString() + file.originalname);
+	},
+});
+// file filter
+const filter = (req, file, callback) => {
+	if (file.mimetype === "image/jpeg" || file.mimetype === "image/png")
+		callback(null, true);
+	else callback(null, false);
+};
+var upload = multer({
+	storage: storage,
+	limits: {
+		fileSize: 1024 * 1024 * 5,
+	},
+	fileFilter: filter,
+});
+
 // GET REQUESTS
 /* GET testing response. */
 router.get("/", cors(), function (req, res) {
@@ -138,15 +162,14 @@ router.post("/registerUser", cors(), (req, res) => {
 });
 
 //adding blog
-router.post("/addBlog", cors(), (req, res) => {
+router.post("/addBlog", upload.single("image"), cors(), (req, res) => {
 	console.log("working");
 	const username = req.body.username;
 	const date = req.body.date;
 	const title = req.body.title;
 	const content = req.body.content;
-	const image = req.body.image;
-	console.log(image);
-	db.addBlog(username, date, title, content, image, function (err, response) {
+	const path = req.protocol + "://" + req.get("host") + "/" + req.file.path;
+	db.addBlog(username, date, title, content, path, function (err, response) {
 		if (err) {
 			console.log(err);
 			res.send({

@@ -9,6 +9,7 @@ class blogView extends Component {
 			content: "",
 			username: "",
 			date: "",
+			url: "",
 		};
 	}
 
@@ -23,6 +24,7 @@ class blogView extends Component {
 				<h1>{this.state.title}</h1>
 				<h2>By {this.state.username}</h2>
 				<h2>Date {this.state.date}</h2>
+				<img src={this.state.url} alt="" />
 				<p>{this.state.content}</p>
 			</div>
 		);
@@ -41,6 +43,7 @@ class blogView extends Component {
 						content: result.data[0].content,
 						username: result.data[0].username,
 						date: result.data[0].date,
+						url: result.data[0].imageurl,
 					});
 					console.log(this.state);
 				},
