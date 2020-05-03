@@ -19,6 +19,7 @@ class addBlog extends Component {
 			title: "",
 			date: date,
 			content: "",
+			selectedFile: null,
 		};
 		this.handleTitleChange = this.handleTitleChange.bind(this);
 		this.handleContentChange = this.handleContentChange.bind(this);
@@ -41,6 +42,8 @@ class addBlog extends Component {
 					placeholder="Write a title"
 					name=""
 				/>
+				<label htmlFor="">Upload Image</label>
+				<input type="file" onChange={this.fileSelectedHandler} name="" id="" />
 				<label htmlFor="">Content</label>
 				<textarea
 					name=""
@@ -55,11 +58,14 @@ class addBlog extends Component {
 		);
 	}
 
+	fileSelectedHandler = (event) => {
+		this.setState({ selectedFile: event.target.files[0] });
+	};
 	handleSubmit(event) {
 		if (this.state.title.length === 0 || this.state.content.length === 0)
 			alert("title or content can't be an empty field");
 		else {
-			console.log("calling api");
+			console.log(this.state.selectedFile);
 			fetch("http://localhost:4000/addBlog", {
 				method: "POST",
 				headers: {
@@ -70,6 +76,7 @@ class addBlog extends Component {
 					title: this.state.title,
 					date: this.state.date,
 					content: this.state.content,
+					image: this.state.selectedFile,
 				}),
 			})
 				.then((res) => res.json())

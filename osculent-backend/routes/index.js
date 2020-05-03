@@ -144,8 +144,9 @@ router.post("/addBlog", cors(), (req, res) => {
 	const date = req.body.date;
 	const title = req.body.title;
 	const content = req.body.content;
-	console.log(`username :${username} title: ${title}`);
-	db.addBlog(username, date, title, content, function (err, response) {
+	const image = req.body.image;
+	console.log(image);
+	db.addBlog(username, date, title, content, image, function (err, response) {
 		if (err) {
 			console.log(err);
 			res.send({

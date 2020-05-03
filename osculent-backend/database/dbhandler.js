@@ -57,12 +57,13 @@ exports.registerUser = function (username, email, password, callback) {
 };
 
 // adding Blog
-exports.addBlog = function (username, date, title, content, callback) {
+exports.addBlog = function (username, date, title, content, image, callback) {
 	user = {
 		$username: username,
 		$date: date,
 		$title: title,
 		$content: content,
+		$image: image,
 	};
 	db.run(
 		`INSERT INTO "blogs" (username,title,date,content) VALUES($username, $title, $date, $content)`,
