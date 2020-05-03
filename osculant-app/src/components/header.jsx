@@ -4,6 +4,10 @@ import { withRouter } from "react-router-dom";
 import "./header.css";
 
 class Header extends Component {
+	componentDidMount() {
+		bake_cookie("loggedIn", false);
+	}
+
 	render() {
 		return (
 			<div className="header">
