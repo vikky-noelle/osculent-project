@@ -20,7 +20,9 @@ class addBlog extends Component {
 			date: date,
 			content: "",
 			selectedFile: null,
+			imgsrc: "",
 		};
+		// this.fileSelectedHandler = this.fileSelectedHandler.bind(this);
 		this.handleTitleChange = this.handleTitleChange.bind(this);
 		this.handleContentChange = this.handleContentChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -44,6 +46,7 @@ class addBlog extends Component {
 				/>
 				<label htmlFor="">Upload Image</label>
 				<input type="file" onChange={this.fileSelectedHandler} name="" id="" />
+				<img src={this.state.imgsrc} alt="image" />
 				<label htmlFor="">Content</label>
 				<textarea
 					name=""
@@ -60,7 +63,18 @@ class addBlog extends Component {
 
 	fileSelectedHandler = (event) => {
 		this.setState({ selectedFile: event.target.files[0] });
+		let reader = new FileReader();
+		reader.onload = function () {
+			this.setState({
+				imgsrc: [reader.result],
+			});
+			console.log(this.state.imgsrc);
+		}.bind(this);
+		if (event.target.files[0]) {
+			reader.readAsDataURL(event.target.files[0]);
+		}
 	};
+
 	handleSubmit(event) {
 		if (this.state.title.length === 0 || this.state.content.length === 0)
 			alert("title or content can't be an empty field");

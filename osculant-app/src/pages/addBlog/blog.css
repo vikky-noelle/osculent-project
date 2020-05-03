@@ -30,3 +30,9 @@ textarea {
 	width: 20%;
 	margin: 20px 40%;
 }
+.blog-form > img {
+	margin-top: 20px;
+	height: 300px;
+	width: 300px;
+	margin-left: 10%;
+}
